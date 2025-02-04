@@ -1,5 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
-import PlusIcon from "../icons/PlusIcon";
+import { useState, useEffect } from "react";
 import { Column, Id, Task } from "../types";
 import ColumnContainer from "./ColumnContainer";
 import {
@@ -15,7 +14,6 @@ import {
 import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 import { createPortal } from "react-dom";
 import TaskCard from "./TaskCard";
-import { FcAddDatabase } from "react-icons/fc";
 import ShowToast from "./ShowToast";
 import BeautifulModal from "./TodoModal";
 import { auth, database, db } from "./firebase";
@@ -43,13 +41,12 @@ const TodoApp = () => {
   const [newListName, setNewListName] = useState("");
   const [selectedTodoId, setSelectedTodoId] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
 
   // get user name and email from another firebase database
 
   const fetchUserName = async () => {
     auth.onAuthStateChanged(async (user) => {
-      // console.log(user)
+      if (!user) return;
       const docRef = doc(db, "Users", user.uid);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
@@ -57,7 +54,6 @@ const TodoApp = () => {
       }
     });
   };
-
   useEffect(() => {
     fetchUserName();
   }, []);
@@ -87,12 +83,14 @@ const TodoApp = () => {
           const updates: { [key: string]: any } = {};
           defaultColumns.forEach((col, index) => {
             const newKey = push(columnsRef).key;
-            updates[newKey] = {
-              id: newKey,
-              title: col.title,
-              order: index,
-              isDefault: col.isDefault,
-            };
+            if (newKey) {
+              updates[newKey] = {
+                id: newKey,
+                title: col.title,
+                order: index,
+                isDefault: col.isDefault,
+              };
+            }
           });
 
           await update(columnsRef, updates);
@@ -269,7 +267,7 @@ const TodoApp = () => {
     if (activeId === overId) return;
 
     const isActiveTask = active.data.current?.type === "Task";
-    const isOverTask = over.data.current?.type === "Task";
+    // const isOverTask = over.data.current?.type === "Task";
     const isOverColumn = over.data.current?.type === "Column";
 
     if (isActiveTask) {
@@ -360,7 +358,7 @@ const TodoApp = () => {
 
   return (<>
       <ResponsiveHeader
-        columns={columns}
+        columns={columns.map((col) => ({ ...col, id: String(col.id) }))}
         selectedTodoId={selectedTodoId}
         setSelectedTodoId={setSelectedTodoId}
         newListName={newListName}
@@ -419,7 +417,8 @@ const TodoApp = () => {
             {activeColumn && (
               <ColumnContainer
                 column={activeColumn}
-                deleteColumn={deleteColumn}
+                // deleteColumn={deleteColumn}
+                deleteColumn={() => deleteColumn(activeColumn)}
                 updateColumn={updateColumn}
                 createTask={createTask}
                 tasks={tasks.filter((t) => t.columnId === activeColumn.id)}

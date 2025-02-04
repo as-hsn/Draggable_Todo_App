@@ -1,5 +1,4 @@
 import { useState } from "react";
-import TrashIcon from "../icons/TrashIcon";
 import { Id, Task } from "../types";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
