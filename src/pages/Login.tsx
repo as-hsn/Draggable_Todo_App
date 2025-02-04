@@ -1,22 +1,24 @@
 import { useState } from "react";
 import { FaRegEye } from "react-icons/fa";
 import { IoEyeOffOutline } from "react-icons/io5";
-import validator from "validator";
 import { NavLink, useNavigate } from "react-router-dom";
 import ShowToast from "../components/ShowToast";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../components/firebase";
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Formik, Field, Form, ErrorMessage, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 
+interface FormValues {
+  email: string;
+  password: string;
+  name?: string;
+}
+
 function Login() {
-  const [state, setState] = useState("Login");
-  const [name, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [type, setType] = useState("password");
-  const [icon, setIcon] = useState(<IoEyeOffOutline size={16} />);
-  const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [state, setState] = useState<string>("Login");
+  const [type, setType] = useState<"password" | "text">("password");
+  const [icon, setIcon] = useState<JSX.Element>(<IoEyeOffOutline size={16} />);
+  const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const validationSchema = Yup.object({
@@ -28,14 +30,14 @@ function Login() {
     }),
   });
 
-  
-
-  const handleOnSubmit = async (values) => {
+  const handleOnSubmit = async (
+    values: FormValues,
+    { setSubmitting }: FormikHelpers<FormValues>
+  ) => {
     console.log("Form submitted with values:", values);
 
     if (state === "Login") {
       if (!values.email || !values.password) {
-        
         return ShowToast({
           message: "Please fill in all fields",
           type: "error",
@@ -50,8 +52,6 @@ function Login() {
       });
     }
 
-    // Removed the backend logic
-
     if (state === "Login") {
       try {
         setLoading(true);
@@ -61,8 +61,8 @@ function Login() {
           type: "success",
         });
         navigate("/");
-      } catch (error) {
-        const firebaseError = error as { code: string; message: string };
+      } catch (error: unknown) {
+        const firebaseError = error as { code?: string; message?: string };
         if (firebaseError.code === "auth/invalid-credential") {
           ShowToast({
             message: "Email or password is incorrect",
@@ -77,11 +77,10 @@ function Login() {
         console.log("Firebase Error:", firebaseError.message);
       } finally {
         setLoading(false);
+        setSubmitting(false);
       }
     }
   };
-
-
 
   const handleToggle = () => {
     if (type === "password") {
@@ -95,11 +94,11 @@ function Login() {
 
   return (
     <Formik
-      initialValues={{ email, password, name }}
+      initialValues={{ email: "", password: "", name: "" }}
       validationSchema={validationSchema}
       onSubmit={handleOnSubmit}
     >
-      {({ values, handleChange, handleBlur, errors, touched }) => (
+      {({ values, handleChange, handleBlur }) => (
         <Form className="min-h-[80vh] mt-20 flex items-center">
           <div className="flex flex-col gap-3 m-auto items-start p-8 min-w-[340px] sm:min-w-96 border rounded-xl text-[#5E5E5E] text-sm shadow-lg mt-14">
             <p className="text-2xl font-semibold">
@@ -107,8 +106,7 @@ function Login() {
             </p>
 
             <p>
-              Please {state === "Sign Up" ? "sign up" : "login"} to book an
-              appointment
+              Please {state === "Sign Up" ? "sign up" : "login"} to book an appointment
             </p>
 
             {state === "Sign Up" && (
@@ -132,9 +130,6 @@ function Login() {
                 name="email"
                 type="email"
                 className="border border-[#DADADA] rounded w-full p-2 mt-1"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.email}
               />
               <ErrorMessage name="email" component="div" className="text-red-500 text-sm" />
             </div>
@@ -145,9 +140,6 @@ function Login() {
                 name="password"
                 type={type}
                 className="border border-[#DADADA] rounded w-full p-2 mt-1 pr-10"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.password}
               />
               <span
                 className="absolute right-3 eye-icon text-cyan-600 transform -translate-y-1/2 cursor-pointer mt-[1.5rem]"
@@ -162,29 +154,16 @@ function Login() {
               type="submit"
               className={`bg-indigo-500 flex justify-center text-white w-full py-2 my-2 rounded-md text-base ${loading && 'pointer-events-none'}`}
             >
-              {loading ? (
-                <>
-                  <span className="mr-2">Verification in Progress...</span>
-                  <div className="loader"></div>
-                </>
-              ) : (
-                state === "Sign Up" ? "Create Account" : "Login"
-              )}
+              {loading ? "Verification in Progress..." : state === "Sign Up" ? "Create Account" : "Login"}
             </button>
 
             {state === "Sign Up" ? (
               <p>
-                Already have an account?{" "}
-                <NavLink to="/login" className="text-primary underline cursor-pointer">
-                  Login here
-                </NavLink>
+                Already have an account? <NavLink to="/login" className="text-primary underline cursor-pointer">Login here</NavLink>
               </p>
             ) : (
               <p>
-                Create a new account?{" "}
-                <NavLink to="/register" className="text-indigo-500 underline cursor-pointer">
-                  Click here
-                </NavLink>
+                Create a new account? <NavLink to="/register" className="text-indigo-500 underline cursor-pointer">Click here</NavLink>
               </p>
             )}
           </div>
