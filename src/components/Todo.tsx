@@ -37,7 +37,7 @@ const TodoApp = () => {
   const [activeColumn, setActiveColumn] = useState<Column | null>(null);
   const [activeTask, setActiveTask] = useState<Task | null>(null);
   const [userName, setUserName] = useState("Loading...");
-  const [userEmail, setUserEmail] = useState("");
+  // const [userEmail, setUserEmail] = useState("");
   const [newListName, setNewListName] = useState("");
   const [selectedTodoId, setSelectedTodoId] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -65,7 +65,7 @@ const TodoApp = () => {
         // Fetch user data
         console.log(user);
         // setUserName(user.displayName || "load..");
-        setUserEmail(user.email || "");
+        // setUserEmail(user.email || "");
 
         // Setup realtime listeners
         const columnsRef = ref(database, `users/${user.uid}/columns`);
