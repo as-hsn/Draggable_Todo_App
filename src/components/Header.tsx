@@ -1,8 +1,25 @@
-import { useState, useRef, useEffect } from "react"
-import PlusIcon from "../icons/PlusIcon"
-import { FcAddDatabase } from "react-icons/fc"
+import { useState, useRef, useEffect, FC } from "react";
+import PlusIcon from "../icons/PlusIcon";
+import { FcAddDatabase } from "react-icons/fc";
 
-export default function ResponsiveHeader({
+interface Column {
+  id: string;
+  title: string;
+}
+
+interface ResponsiveHeaderProps {
+  columns?: Column[];
+  selectedTodoId: string;
+  setSelectedTodoId: (id: string) => void;
+  newListName: string;
+  setNewListName: (name: string) => void;
+  addTask: (selectedTodoId: string, newListName: string) => void;
+  userName: string;
+  handleLogout: () => void;
+  setIsModalOpen: (isOpen: boolean) => void;
+}
+
+const ResponsiveHeader: FC<ResponsiveHeaderProps> = ({
   columns = [],
   selectedTodoId,
   setSelectedTodoId,
@@ -12,30 +29,32 @@ export default function ResponsiveHeader({
   userName,
   handleLogout,
   setIsModalOpen,
-}) {
-  const [isOpen, setIsOpen] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const dropdownRef = useRef(null)
-  const timeoutRef = useRef(null)
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleMouseEnter = () => {
-    clearTimeout(timeoutRef.current)
-    setIsOpen(true)
-  }
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    setIsOpen(true);
+  };
 
   const handleMouseLeave = () => {
     timeoutRef.current = setTimeout(() => {
-      setIsOpen(false)
-    }, 300) // 300ms delay before closing
-  }
+      setIsOpen(false);
+    }, 300); // 300ms delay before closing
+  };
 
   useEffect(() => {
     return () => {
       if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current)
+        clearTimeout(timeoutRef.current);
       }
-    }
-  }, [])
+    };
+  }, []);
 
   return (
     <div className="sticky top-0 z-50 w-full">
@@ -78,23 +97,23 @@ export default function ResponsiveHeader({
                 ))}
               </select>
 
-<form onSubmit={(e) => {e.preventDefault(); addTask(selectedTodoId, newListName)}}>
-  <div className="flex gap-2">
-                <input
-                  type="text"
-                  value={newListName}
-                  onChange={(e) => setNewListName(e.target.value)}
-                  placeholder="Enter task"
-                  className="text-black bg-zinc-100/50 border-2 border-indigo-400 px-3 py-2 rounded-lg w-48"
-                />
-                <button
-                  className="bg-indigo-500 text-white p-2 rounded-lg hover:bg-indigo-400"
-                >
-                  <PlusIcon />
-                </button>
-              </div>
-</form>
-              
+              <form onSubmit={(e) => { e.preventDefault(); addTask(selectedTodoId, newListName); }}>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={newListName}
+                    onChange={(e) => setNewListName(e.target.value)}
+                    placeholder="Enter task"
+                    className="text-black bg-zinc-100/50 border-2 border-indigo-400 px-3 py-2 rounded-lg w-48"
+                  />
+                  <button
+                    className="bg-indigo-500 text-white p-2 rounded-lg hover:bg-indigo-400"
+                    type="submit"
+                  >
+                    <PlusIcon />
+                  </button>
+                </div>
+              </form>
 
               <button
                 onClick={() => setIsModalOpen(true)}
@@ -127,10 +146,10 @@ export default function ResponsiveHeader({
 
               {isOpen && (
                 <div className="absolute top-5 -right-8 w-24 bg-stone-100 rounded-lg shadow-lg p-2 text-sm sm:w-32 sm:p-4 sm:text-base sm:-right-10">
-                <p className="hover:text-indigo-500 text-black cursor-pointer" onClick={handleLogout}>
-                  Logout
-                </p>
-              </div>
+                  <p className="hover:text-indigo-500 text-black cursor-pointer" onClick={handleLogout}>
+                    Logout
+                  </p>
+                </div>
               )}
             </div>
           </div>
@@ -154,25 +173,23 @@ export default function ResponsiveHeader({
               ))}
             </select>
 
-            <form  onSubmit={(e) => { e.preventDefault(); addTask(selectedTodoId, newListName); }}>
-  <div className="flex gap-2 mb-2">
-    <input
-      type="text"
-      value={newListName}
-      onChange={(e) => setNewListName(e.target.value)}
-      placeholder="Enter task"
-      className="text-black bg-zinc-100/50 border-2 border-indigo-400 px-3 py-2 rounded-lg flex-grow"
-    />
-    <button
-      type="submit"
-      className="bg-indigo-500 text-white p-2 rounded-lg hover:bg-indigo-400"
-    >
-      <PlusIcon />
-    </button>
-  </div>
-</form>
-              
-            
+            <form onSubmit={(e) => { e.preventDefault(); addTask(selectedTodoId, newListName); }}>
+              <div className="flex gap-2 mb-2">
+                <input
+                  type="text"
+                  value={newListName}
+                  onChange={(e) => setNewListName(e.target.value)}
+                  placeholder="Enter task"
+                  className="text-black bg-zinc-100/50 border-2 border-indigo-400 px-3 py-2 rounded-lg flex-grow"
+                />
+                <button
+                  type="submit"
+                  className="bg-indigo-500 text-white p-2 rounded-lg hover:bg-indigo-400"
+                >
+                  <PlusIcon />
+                </button>
+              </div>
+            </form>
 
             <button
               onClick={() => setIsModalOpen(true)}
@@ -185,5 +202,7 @@ export default function ResponsiveHeader({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
+
+export default ResponsiveHeader;
