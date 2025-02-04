@@ -3,7 +3,6 @@ import TrashIcon from "../icons/TrashIcon";
 import { Column, Id } from "../types";
 import { useSortable, SortableContext } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import PlusIcon from "../icons/PlusIcon";
 import { Task } from "../types";
 import TaskCard from "./TaskCard";
 import ShowToast from "./ShowToast";
@@ -18,25 +17,22 @@ interface Props {
   createTask: (columnId: Id) => void;
   deleteTask: (id: Id) => void;
   updateTask: (id: Id, content: string) => void;
-  //   ShowToast: (message: { message: string; type: string }) => void;
-  //   columns: Column[]; // List of columns to check for duplicate title
-  allColumns: Column[]; // Access allColumns prop here
+  allColumns: Column[]; 
   deleteAllTasks: (id: Id) => void;
 }
-
 
 const ColumnContainer = (props: Props) => {
   const formRef = useRef<HTMLFormElement | null>(null);
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (formRef.current && !formRef.current.contains(event.target as Node)) {
-        setEditMode(false); // Close edit mode when clicked outside
+        setEditMode(false); 
       }
     };
     // setNewTitle("")
-    document.addEventListener("mousedown", handleClickOutside); // Add the event listener
+    document.addEventListener("mousedown", handleClickOutside); 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside); // Clean up the event listener on component unmount
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
   const [editMode, setEditMode] = useState(false);
@@ -76,9 +72,6 @@ const ColumnContainer = (props: Props) => {
 
   // Function to check for duplicate titles and handle column update
   const handleColumnUpdate = () => {
-    console.log(newTitle);
-    console.log(allColumns);
-
     if (newTitle === "") {
       ShowToast({
         message: "Please add some text to the column title",
@@ -88,7 +81,7 @@ const ColumnContainer = (props: Props) => {
     }
 
     const titleExists = allColumns.some(
-      (card) => card.title === newTitle && card.id !== column.id // Ignore the current column
+      (card) => card.title === newTitle && card.id !== column.id 
     );
 
     if (titleExists) {
@@ -98,10 +91,8 @@ const ColumnContainer = (props: Props) => {
       });
       return;
     } else {
-      // Update the column title first
       updateColumn(column.id, newTitle);
 
-      // Delay setting editMode to false to ensure UI updates correctly
       setTimeout(() => {
         setEditMode(false);
       }, 100);
@@ -122,10 +113,6 @@ const ColumnContainer = (props: Props) => {
       ></div>
     );
   }
-
-  //   const deleteAllTasks = () => {
-  //     tasks.forEach((task) => deleteTask(task.id));
-  //   };
 
   return (
     <div
@@ -215,9 +202,6 @@ const ColumnContainer = (props: Props) => {
           ))}
       </div>
 
-
-
-
       {/* Column Task Container*/}
       <div className="flex flex-grow flex-col gap-4 p-2 overflow-x-hidden overflow-y-auto  border-black  border-b-[1px] ">
         <SortableContext items={tasksIds}>
@@ -246,7 +230,6 @@ const ColumnContainer = (props: Props) => {
           }}
           className="flex gap-1 items-center text-white bg-indigo-500 border-2 border-indigo-600 rounded-lg p-2 px-5 transition-all duration-300 ease-in-out transform hover:bg-indigo-600 hover:border-indigo-700 hover:scale-105 active:bg-indigo-700"
         >
-          
           <span className="font-normal text-sm">Add Task</span>
         </button>
 
@@ -259,11 +242,9 @@ const ColumnContainer = (props: Props) => {
             <span className="font-normal text-sm">Delete All Tasks</span>
           </button>
         ) : (
-            <p className="flex gap-1 items-center text-black border-[0.5px] border-gray-500 rounded-lg p-2 px-4">
-  <span className="font-normal text-sm">You have no tasks</span>
-</p>
-
-          
+          <p className="flex gap-1 items-center text-black border-[0.5px] border-gray-500 rounded-lg p-2 px-4">
+            <span className="font-normal text-sm">You have no tasks</span>
+          </p>
         )}
       </div>
     </div>
