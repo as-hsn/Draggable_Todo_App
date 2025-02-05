@@ -17,6 +17,7 @@ interface ResponsiveHeaderProps {
   userName: string;
   handleLogout: () => void;
   setIsModalOpen: (isOpen: boolean) => void;
+  userEmail: string
 }
 
 const ResponsiveHeader: FC<ResponsiveHeaderProps> = ({
@@ -29,6 +30,7 @@ const ResponsiveHeader: FC<ResponsiveHeaderProps> = ({
   userName,
   handleLogout,
   setIsModalOpen,
+  userEmail
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -145,11 +147,24 @@ const ResponsiveHeader: FC<ResponsiveHeaderProps> = ({
               </div>
 
               {isOpen && (
-                <div className="absolute top-5 -right-8 w-24 bg-stone-100 rounded-lg shadow-lg p-2 text-sm sm:w-32 sm:p-4 sm:text-base sm:-right-10">
-                  <p className="hover:text-indigo-500 text-black cursor-pointer" onClick={handleLogout}>
-                    Logout
-                  </p>
+                <div className="absolute top-5 -right-8 w-40 text-center bg-white rounded-lg shadow-lg p-3 sm:w-60 sm:p-4 sm:-right-10">
+                {/* Email Display with Full Background */}
+                <div className="bg-gray-200 rounded-md px-3 py-2 text-gray-700 text-sm sm:text-base break-words">
+                  {userEmail}
                 </div>
+              
+                {/* Divider */}
+                <div className="border-b border-gray-300 my-2"></div>
+              
+                {/* Logout Button */}
+                <button
+                  onClick={handleLogout}
+                  className="w-full text-center text-red-500 hover:text-white bg-transparent hover:bg-red-500 transition duration-200 p-2 rounded-md text-sm sm:text-base"
+                >
+                  Logout
+                </button>
+              </div>
+
               )}
             </div>
           </div>

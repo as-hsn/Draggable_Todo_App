@@ -3,15 +3,21 @@ import { Id, Task } from "../types";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { MdOutlineDelete } from "react-icons/md";
+import { TbListDetails } from "react-icons/tb";
+import DetailsModal from "./DetailsModal";
 
 interface Props {
   task: Task;
   deleteTask: (id: Id) => void;
   updateTask: (id: Id, content: string) => void;
+  columnName: string;
 }
 
-const TaskCard = ({ task, deleteTask, updateTask }: Props) => {
+const TaskCard = ({ task, deleteTask, updateTask, columnName }: Props) => {
   const [mouseIsOver, setMouseIsOver] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [sendIdToModal, setSendIdToModal] = useState<string>("");
+  const [sendColumnIdToModal, setSendColumnIdToModal] = useState<string>("");
   const [editMode, setEditMode] = useState(false);
   const {
     setNodeRef,
@@ -74,7 +80,21 @@ const TaskCard = ({ task, deleteTask, updateTask }: Props) => {
     );
   }
 
+  
+
   return (
+    <>
+     {/* Modal Component */}
+     <DetailsModal
+        taskContent={task.content}
+        openModal={() => setIsModalOpen(true)}
+        isOpen={isModalOpen} 
+        closeModal={() => setIsModalOpen(false)} 
+        taskId = {sendIdToModal}
+        columnId = {sendColumnIdToModal}
+        columnName={columnName}
+      />
+   
     <div
       onClick={toggleEditMode}
       onMouseEnter={() => {
@@ -92,22 +112,20 @@ const TaskCard = ({ task, deleteTask, updateTask }: Props) => {
         hover:ring-2 hover:ring-inset hover:ring-indigo-600
         cursor-grab relative"
     >
-        
-        <p
+      <p
         title={task.content}
-  className="my-auto h-[90%] w-full overflow-y-auto
+        className="my-auto h-[90%] w-[16rem] overflow-y-auto
              overflow-x-hidden truncate whitespace-pre-wrap
              pr-6 rtl:pr-0 rtl:pl-6
              scrollbar-thin scrollbar-track-transparent 
              scrollbar-thumb-gray-500 hover:scrollbar-thumb-gray-700 
              custom-scrollbar"
->
-  {task.content}
-</p>
-
-
+      >
+        {task.content}
+      </p>
 
       {mouseIsOver && (
+        <>
         <button
           onClick={() => {
             deleteTask(task.id);
@@ -117,8 +135,16 @@ const TaskCard = ({ task, deleteTask, updateTask }: Props) => {
         >
           <MdOutlineDelete className="text-red-500 text-[1.35rem]" />
         </button>
+        <button
+        onClick={() => {setIsModalOpen(true); toggleEditMode(); setSendIdToModal(String(task.id)); setSendColumnIdToModal(String(task.columnId))}}
+        className="stroke-white absolute right-10 top-1/2 -translate-y-1/2 p-2 rounded"
+      >
+        <TbListDetails className="text-stone-700 text-[1.35rem]" />
+      </button>
+        </>
       )}
     </div>
+    </>
   );
 };
 

@@ -37,7 +37,7 @@ const TodoApp = () => {
   const [activeColumn, setActiveColumn] = useState<Column | null>(null);
   const [activeTask, setActiveTask] = useState<Task | null>(null);
   const [userName, setUserName] = useState("Loading...");
-  // const [userEmail, setUserEmail] = useState("");
+  const [userEmail, setUserEmail] = useState("");
   const [newListName, setNewListName] = useState("");
   const [selectedTodoId, setSelectedTodoId] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -51,6 +51,7 @@ const TodoApp = () => {
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         setUserName(docSnap.data().name || "load..");
+        setUserEmail(docSnap.data().email || "load")
       }
     });
   };
@@ -365,6 +366,7 @@ const TodoApp = () => {
         setNewListName={setNewListName}
         addTask={addTask}
         userName={userName? userName : "Loading "}
+        userEmail={userEmail? userEmail : "Loading"}
         handleLogout={handleLogout}
         setIsModalOpen={setIsModalOpen}
       />
@@ -430,6 +432,7 @@ const TodoApp = () => {
             )}
             {activeTask && (
               <TaskCard
+                columnName=""
                 task={activeTask}
                 deleteTask={deleteTask}
                 updateTask={updateTask}

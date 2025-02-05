@@ -211,7 +211,8 @@ const ColumnContainer = (props: Props) => {
             </p>
           ) : (
             tasks.map((task) => (
-              <TaskCard
+                <TaskCard
+                columnName={column.title}
                 key={task.id}
                 task={task}
                 deleteTask={deleteTask}
