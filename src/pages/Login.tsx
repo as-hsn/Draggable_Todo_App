@@ -69,7 +69,7 @@ function Login() {
         onSubmit={handleOnSubmit}
       >
         {({}) => (
-          <Form className="min-h-[80vh] mt-20 flex items-center">
+          <Form className="min-h-[80vh] justify-center items-center mt-20 flex">
             <div className="flex flex-col gap-3 m-auto items-start p-8 min-w-[340px] sm:min-w-96 border rounded-xl text-[#5E5E5E] text-sm shadow-lg mt-14">
               <p className="text-2xl font-semibold">Login</p>
               <p>Please login to book an appointment</p>

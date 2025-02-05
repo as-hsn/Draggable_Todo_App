@@ -388,8 +388,8 @@ const TodoApp = () => {
         onDragEnd={onDragEnd}
         onDragOver={onDragOver}
       >
-        <div className="m-auto flex gap-4 mt-[6rem]">
-          <div className="flex gap-4">
+        <div className="m-auto flex gap-4 mt-[6rem] custom-card-container">
+          <div className="flex gap-4 custom-card">
             <SortableContext items={columns.map((col) => col.id)}>
               {columns
                 .sort((a, b) => (a.order || 0) - (b.order || 0))

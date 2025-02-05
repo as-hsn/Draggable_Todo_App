@@ -95,3 +95,34 @@ body,
     transform: rotate(-1turn);
   }
 }
+
+/* Default Styles (for larger screens) */
+.custom-card-container {
+  margin: auto;
+  display: flex;
+  gap: 1rem;
+  margin-top: 6rem;
+}
+
+.custom-card {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  /* Ensure the container takes full viewport height */
+  .custom-card-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically center */
+    align-items: center; /* Horizontally center */
+    min-height: 100vh; /* Ensure it fills the viewport height */
+    margin-top: 0; /* Remove margin top to prevent offset */
+  }
+  
+  /* Ensure the card takes full width on mobile */
+  .custom-card {
+    width: 100%;
+  }
+}
