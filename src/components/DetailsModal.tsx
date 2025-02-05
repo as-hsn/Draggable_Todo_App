@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
-  getDatabase,
+  // getDatabase,
   ref,
   set,
   get,
@@ -24,10 +24,10 @@ const DetailsModal: React.FC<ModalProps> = ({
   isOpen,
   closeModal,
   taskId,
-  columnId,
+  // columnId,
   taskContent,
   columnName,
-  openModal
+  // openModal
 }) => {
   const [taskDescription, setTaskDescription] = useState<string>("");
   const [description, setDescription] = useState<string>("");
