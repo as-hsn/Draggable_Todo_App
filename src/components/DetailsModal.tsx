@@ -96,8 +96,8 @@ const DetailsModal: React.FC<ModalProps> = ({
 
   if (!isOpen) return null;
   return (
-    <div className="fixed inset-0 w-full overflow-y-scroll h-full z-50 top-0 flex justify-center backdrop-blur-lg">
-        <div className="text-[#b6c2cf] absolute top-0 left-0 right-0 mx-auto p-6 rounded-2xl w-[768px] md:min-h-[890px] md:max-h-full bg-white border-t-4 border-b-4 shadow-2xl border-zinc-400 opacity-100 my-12 flex max-md:flex-col max-md:w-[80%] max-md:h-fit z-[9999]">
+    <div className="fixed inset-0 w-full overflow-y-scroll h-full z-50 top-0 flex justify-center backdrop-blur-3xl">
+        <div className="text-[#b6c2cf] absolute top-0 left-0 right-0 mx-auto p-6 rounded-2xl w-[768px] md:min-h-[890px] md:max-h-full bg-white border- shadow-2xl border-zinc-300 opacity-100 my-12 flex max-md:flex-col max-md:w-[80%] max-md:h-fit z-[9999]">
         <svg
           stroke="currentColor"
           fill="currentColor"
