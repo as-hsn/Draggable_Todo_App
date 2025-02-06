@@ -97,13 +97,13 @@ const DetailsModal: React.FC<ModalProps> = ({
   if (!isOpen) return null;
   return (
     <div className="fixed inset-0 w-full overflow-y-scroll h-full z-50 top-0 flex justify-center backdrop-blur-md">
-      <div className="text-[#b6c2cf] absolute top-0 left-0 right-0 mx-auto p-6 rounded-2xl w-[768px] md:min-h-[890px] md:max-h-full bg-slate-500 border-2 border-indigo-300 opacity-100 my-12 flex max-md:flex-col max-md:w-[80%] max-md:h-fit z-[9999]">
+        <div className="text-[#b6c2cf] absolute top-0 left-0 right-0 mx-auto p-6 rounded-2xl w-[768px] md:min-h-[890px] md:max-h-full bg-white border-t-4 border-b-4 shadow-2xl border-zinc-400 opacity-100 my-12 flex max-md:flex-col max-md:w-[80%] max-md:h-fit z-[9999]">
         <svg
           stroke="currentColor"
           fill="currentColor"
           stroke-width="0"
           viewBox="0 0 512 512"
-          className="absolute top-4 right-4 text-2xl  hover:bg-zinc-600 hover:text-white cursor-pointer        md:hidden"
+          className="absolute top-4 right-4 text-2xl  hover:bg-zinc-400 hover:text-white cursor-pointer        md:hidden"
           height="1em"
           width="1em"
           xmlns="http://www.w3.org/2000/svg"
@@ -118,7 +118,7 @@ const DetailsModal: React.FC<ModalProps> = ({
               fill="currentColor"
               stroke-width="0"
               viewBox="0 0 24 24"
-              className="text-2xl"
+              className="text-2xl text-stone-700"
               height="1em"
               width="1em"
               xmlns="http://www.w3.org/2000/svg"
@@ -128,26 +128,26 @@ const DetailsModal: React.FC<ModalProps> = ({
             </svg>
 
             <div className="ml-4 w-[87%]">
-              <h1 className="text-xl mb-1 break-words w-full max-h-40 overflow-y-auto ">
+              <h1 className="text-xl mb-1 break-words w-full max-h-40 overflow-y-auto text-stone-700">
                 {taskContent}
               </h1>
-              <h2 className="text-sm font-normal truncate max-w-32 ">
+              <h2 className="text-sm font-normal truncate max-w-32 text-stone-700">
                 in list
-                <span className="px-1 rounded-sm font-normal text-slate-800  bg-zinc-400">
+                <span className="px-1 rounded-sm font-normal text-slate-800  bg-zinc-200">
                   {columnName}
                 </span>
               </h2>
             </div>
           </div>
           <div className="ml-10">
-            <h2 className="text-sm mb-1">Notifications</h2>
+            <h2 className="text-sm mb-1 text-stone-700">Notifications</h2>
 
             <div
               onClick={() => setWatch((prev) => !prev)}
-              className="flex items-center gap-1 px-3  bg-zinc-400 cursor-pointer w-fit py-2 rounded"
+              className="flex items-center gap-1 px-3  bg-zinc-200 cursor-pointer w-fit py-2 rounded"
             >
               {watch ? (
-                <div className="flex items-center gap-1 px-3  bg-zinc-400 cursor-pointer w-fit py-2 rounded">
+                <div className="flex items-center gap-1 px-3  bg-zinc-200 cursor-pointer w-fit py-2 rounded">
                   <svg
                   className="text-slate-800"
                     stroke="currentColor"
@@ -218,6 +218,7 @@ const DetailsModal: React.FC<ModalProps> = ({
                   height="1em"
                   width="1em"
                   xmlns="http://www.w3.org/2000/svg"
+                  className="text-stone-700"
                 >
                   <rect x="0.46" y="3.06" width="23.08" height="2.18"></rect>
                   <rect x="0.46" y="8.29" width="23.08" height="2.18"></rect>
@@ -226,12 +227,12 @@ const DetailsModal: React.FC<ModalProps> = ({
                 </svg>
               </div>
               <div className="ml-4">
-                <h1 className="text-lg mb-1">Description</h1>
+                <h1 className="text-lg mb-1 text-stone-700">Description</h1>
               </div>
             </div>
             {description && !editMode ? (
               <div className="ml-10 mt-1">
-                <div className=" bg-zinc-400 outline-none px-3 py-2 text-sm font-normal w-full rounded break-words max-h-28 text-slate-800">
+                <div className=" bg-zinc-200 outline-none px-3 py-2 text-sm font-normal w-full rounded break-words max-h-28 text-slate-800">
                   <p>{description}</p>
                 </div>
                 <div className="flex items-center">
@@ -287,7 +288,7 @@ const DetailsModal: React.FC<ModalProps> = ({
             ) : (
               <div className="ml-10 mt-1">
                 <textarea
-                  className=" bg-zinc-400 text-slate-800 placeholder-slate-800 outline-none px-3 pt-2 pb-8 text-sm font-normal w-full rounded resize-none"
+                  className=" bg-zinc-200 text-slate-800 placeholder-slate-800 outline-none px-3 pt-2 pb-8 text-sm font-normal w-full rounded resize-none"
                   value={taskDescription}
                   onChange={(e) => setTaskDescription(e.target.value)}
                   placeholder="Edit task description..."
@@ -316,6 +317,7 @@ const DetailsModal: React.FC<ModalProps> = ({
                     height="1em"
                     width="1em"
                     xmlns="http://www.w3.org/2000/svg"
+                    className="text-stone-700"
                   >
                     <path
                       fill="none"
@@ -326,9 +328,9 @@ const DetailsModal: React.FC<ModalProps> = ({
                   </svg>
                 </div>
                 <div className="ml-4">
-                  <h1 className="text-lg mb-1">
+                  <h1 className="text-lg mb-1 text-stone-700">
                     Comments{" "}
-                    <span className="ml-1 text-sm font-extralight">
+                    <span className="ml-1 text-sm font-extralight text-stone-700">
                       {comments.length === 0 && "0"}
                     </span>
                   </h1>
@@ -344,13 +346,13 @@ const DetailsModal: React.FC<ModalProps> = ({
                   </div>
                 </div>
               </div>
-              <button className="px-3 py-1 text-slate-800  bg-zinc-400 rounded  hover:bg-zinc-600 hover:text-white cursor-pointer">
+              <button className="px-3 py-1 text-slate-800  bg-zinc-200 rounded  hover:bg-zinc-400 hover:text-white cursor-pointer">
                 Show Details
               </button>
             </div>
             <div className="ml-10 mt-2">
               <textarea
-                className="bg-zinc-400 text-slate-800 placeholder-slate-800 outline-none px-3 py-2 text-sm font-normal w-full rounded resize-none h-20"
+                className="bg-zinc-200 text-slate-800 placeholder-slate-800 outline-none px-3 py-2 text-sm font-normal w-full rounded resize-none h-20"
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}
                 placeholder="Add a comment..."
@@ -369,7 +371,7 @@ const DetailsModal: React.FC<ModalProps> = ({
                   {Object.entries(comments).map(([id, com], index) => (
                     <div key={index}>
                       <div className="flex gap-2">
-                        <div className="bg-zinc-400 text-slate-800 translate-x-12 outline-none px-3 py-2 text-sm w-60 overflow-hidden rounded text-wrap break-words">
+                        <div className="bg-zinc-200 text-slate-800 translate-x-12 outline-none px-3 py-2 text-sm w-60 overflow-hidden rounded text-wrap break-words">
                           {com.text}
                         </div>
                       </div>
@@ -416,7 +418,7 @@ const DetailsModal: React.FC<ModalProps> = ({
             fill="currentColor"
             stroke-width="0"
             viewBox="0 0 512 512"
-            className="absolute top-0 right-0 text-2xl  hover:bg-zinc-600 hover:text-white cursor-pointer max-md:hidden"
+            className="absolute top-0 right-0 text-2xl  hover:bg-zinc-400 hover:text-white cursor-pointer max-md:hidden text-stone-700"
             height="1em"
             width="1em"
             xmlns="http://www.w3.org/2000/svg"
@@ -425,7 +427,7 @@ const DetailsModal: React.FC<ModalProps> = ({
           </svg>
 
           <div className="flex flex-col gap-2     max-md:flex-wrap max-md:flex-row">
-            <button className="w-full flex items-center text-slate-800 bg-zinc-400 py-2 pl-4 gap-1 rounded text-sm  hover:bg-zinc-600 hover:text-white cursor-pointer       max-md:text-[13px] max-md:pl-3 max-md:pr-1 max-md:w-[48%]">
+            <button className="w-full flex items-center text-slate-800 bg-zinc-200 py-2 pl-4 gap-1 rounded text-sm  hover:bg-zinc-400 hover:text-white cursor-pointer       max-md:text-[13px] max-md:pl-3 max-md:pr-1 max-md:w-[48%]">
               <div className="text-base">
                 {" "}
                 <svg
@@ -447,7 +449,7 @@ const DetailsModal: React.FC<ModalProps> = ({
               </div>
               Join
             </button>
-            <button className="w-full flex items-center text-slate-800  bg-zinc-400 py-2 pl-4 gap-1 rounded text-sm  hover:bg-zinc-600 hover:text-white cursor-pointer       max-md:text-[13px] max-md:pl-3 max-md:pr-1 max-md:w-[48%]">
+            <button className="w-full flex items-center text-slate-800  bg-zinc-200 py-2 pl-4 gap-1 rounded text-sm  hover:bg-zinc-400 hover:text-white cursor-pointer       max-md:text-[13px] max-md:pl-3 max-md:pr-1 max-md:w-[48%]">
               <div className="text-base">
                 <svg
                   stroke="currentColor"
@@ -466,7 +468,7 @@ const DetailsModal: React.FC<ModalProps> = ({
               </div>
               Members
             </button>
-            <button className="w-full flex items-center text-slate-800  bg-zinc-400 py-2 pl-4 gap-1 rounded text-sm  hover:bg-zinc-600 hover:text-white cursor-pointer       max-md:text-[13px] max-md:pl-3 max-md:pr-1 max-md:w-[48%]">
+            <button className="w-full flex items-center text-slate-800  bg-zinc-200 py-2 pl-4 gap-1 rounded text-sm  hover:bg-zinc-400 hover:text-white cursor-pointer       max-md:text-[13px] max-md:pl-3 max-md:pr-1 max-md:w-[48%]">
               <div className="text-base">
                 <svg
                   stroke="currentColor"
@@ -485,7 +487,7 @@ const DetailsModal: React.FC<ModalProps> = ({
               </div>
               Labels
             </button>
-            <button className="w-full flex items-center text-slate-800  bg-zinc-400 py-2 pl-4 gap-1 rounded text-sm  hover:bg-zinc-600 hover:text-white cursor-pointer       max-md:text-[13px] max-md:pl-3 max-md:pr-1 max-md:w-[48%]">
+            <button className="w-full flex items-center text-slate-800  bg-zinc-200 py-2 pl-4 gap-1 rounded text-sm  hover:bg-zinc-400 hover:text-white cursor-pointer       max-md:text-[13px] max-md:pl-3 max-md:pr-1 max-md:w-[48%]">
               <div className="text-base">
                 <svg
                   stroke="currentColor"
@@ -513,7 +515,7 @@ const DetailsModal: React.FC<ModalProps> = ({
               </div>
               Checklist
             </button>
-            <button className="w-full flex items-center text-slate-800 bg-zinc-400 py-2 pl-4 gap-1 rounded text-sm  hover:bg-zinc-600 hover:text-white cursor-pointer       max-md:text-[13px] max-md:pl-3 max-md:pr-1 max-md:w-[48%]">
+            <button className="w-full flex items-center text-slate-800 bg-zinc-200 py-2 pl-4 gap-1 rounded text-sm  hover:bg-zinc-400 hover:text-white cursor-pointer       max-md:text-[13px] max-md:pl-3 max-md:pr-1 max-md:w-[48%]">
               <div className="text-base">
                 <svg
                   stroke="currentColor"
@@ -529,7 +531,7 @@ const DetailsModal: React.FC<ModalProps> = ({
               </div>
               Dates
             </button>
-            <button className="w-full flex items-center text-slate-800 bg-zinc-400 py-2 pl-4 gap-1 rounded text-sm  hover:bg-zinc-600 hover:text-white cursor-pointer       max-md:text-[13px] max-md:pl-3 max-md:pr-1 max-md:w-[48%]">
+            <button className="w-full flex items-center text-slate-800 bg-zinc-200 py-2 pl-4 gap-1 rounded text-sm  hover:bg-zinc-400 hover:text-white cursor-pointer       max-md:text-[13px] max-md:pl-3 max-md:pr-1 max-md:w-[48%]">
               <div className="text-base">
                 <svg
                   stroke="currentColor"
@@ -548,7 +550,7 @@ const DetailsModal: React.FC<ModalProps> = ({
               </div>
               Attachment
             </button>
-            <button className="w-full flex items-center text-slate-800 bg-zinc-400 py-2 pl-4 gap-1 rounded text-sm  hover:bg-zinc-600 hover:text-white cursor-pointer       max-md:text-[13px] max-md:pl-3 max-md:pr-1 max-md:w-[48%]">
+            <button className="w-full flex items-center text-slate-800 bg-zinc-200 py-2 pl-4 gap-1 rounded text-sm  hover:bg-zinc-400 hover:text-white cursor-pointer       max-md:text-[13px] max-md:pl-3 max-md:pr-1 max-md:w-[48%]">
               <div className="text-base">
                 <svg
                   stroke="currentColor"
@@ -568,7 +570,7 @@ const DetailsModal: React.FC<ModalProps> = ({
               </div>
               Cover
             </button>
-            <button className="w-full flex items-center text-slate-800 bg-zinc-400 py-2 pl-4 gap-1 rounded text-sm  hover:bg-zinc-600 hover:text-white cursor-pointer       max-md:text-[13px] max-md:pl-3 max-md:pr-1 max-md:w-[48%]">
+            <button className="w-full flex items-center text-slate-800 bg-zinc-200 py-2 pl-4 gap-1 rounded text-sm  hover:bg-zinc-400 hover:text-white cursor-pointer       max-md:text-[13px] max-md:pl-3 max-md:pr-1 max-md:w-[48%]">
               <div className="text-base">
                 <svg
                   stroke="currentColor"
@@ -588,8 +590,8 @@ const DetailsModal: React.FC<ModalProps> = ({
           </div>
           <div className="flex flex-col gap-4 my-6">
             <div className="flex flex-col gap-2">
-              <h5 className="text-[12px]">Power-Ups</h5>
-              <button className="w-full flex items-center py-2 pl-4 gap-2 rounded text-sm  hover:bg-zinc-600 hover:text-white">
+              <h5 className="text-[12px] text-stone-700">Power-Ups</h5>
+              <button className="w-full flex items-center py-2 pl-4 gap-2 rounded text-sm  hover:bg-zinc-400 hover:text-white text-stone-700">
                 <svg
                   stroke="currentColor"
                   fill="currentColor"
@@ -609,8 +611,8 @@ const DetailsModal: React.FC<ModalProps> = ({
               </button>
             </div>
             <div className="flex flex-col gap-2">
-              <h5 className="text-[12px]">Automation</h5>
-              <button className="w-full flex items-center py-2 pl-4 gap-2 rounded text-sm  hover:bg-zinc-600 hover:text-white">
+              <h5 className="text-[12px] text-stone-700">Automation</h5>
+              <button className="w-full flex items-center py-2 pl-4 gap-2 rounded text-sm  hover:bg-zinc-400 hover:text-white text-stone-700">
                 <svg
                   stroke="currentColor"
                   fill="currentColor"
@@ -628,7 +630,7 @@ const DetailsModal: React.FC<ModalProps> = ({
             </div>
           </div>
           <div className="flex flex-col gap-2 text-slate-800  max-md:flex-wrap max-md:flex-row">
-            <button className="w-full flex items-center  bg-zinc-400 py-2 pl-4 gap-1 rounded text-sm  hover:bg-zinc-600 hover:text-white cursor-pointer       max-md:text-[13px] max-md:pl-3 max-md:pr-1 max-md:w-[48%]">
+            <button className="w-full flex items-center  bg-zinc-200 py-2 pl-4 gap-1 rounded text-sm  hover:bg-zinc-400 hover:text-white cursor-pointer       max-md:text-[13px] max-md:pl-3 max-md:pr-1 max-md:w-[48%]">
               <div className="text-base">
                 <svg
                   stroke="currentColor"
@@ -645,7 +647,7 @@ const DetailsModal: React.FC<ModalProps> = ({
               </div>
               Move
             </button>
-            <button className="w-full flex items-center  bg-zinc-400 py-2 pl-4 gap-1 rounded text-sm  hover:bg-zinc-600 hover:text-white cursor-pointer       max-md:text-[13px] max-md:pl-3 max-md:pr-1 max-md:w-[48%]">
+            <button className="w-full flex items-center  bg-zinc-200 py-2 pl-4 gap-1 rounded text-sm  hover:bg-zinc-400 hover:text-white cursor-pointer       max-md:text-[13px] max-md:pl-3 max-md:pr-1 max-md:w-[48%]">
               <div className="text-base">
                 <svg
                   stroke="currentColor"
@@ -661,7 +663,7 @@ const DetailsModal: React.FC<ModalProps> = ({
               </div>
               Copy
             </button>
-            <button className="w-full flex items-center  bg-zinc-400 py-2 pl-4 gap-1 rounded text-sm  hover:bg-zinc-600 hover:text-white cursor-pointer       max-md:text-[13px] max-md:pl-3 max-md:pr-1 max-md:w-[48%]">
+            <button className="w-full flex items-center  bg-zinc-200 py-2 pl-4 gap-1 rounded text-sm  hover:bg-zinc-400 hover:text-white cursor-pointer       max-md:text-[13px] max-md:pl-3 max-md:pr-1 max-md:w-[48%]">
               <div className="text-base">
                 <svg
                   stroke="currentColor"
@@ -678,7 +680,7 @@ const DetailsModal: React.FC<ModalProps> = ({
               </div>
               Mirror
             </button>
-            <button className="w-full flex items-center  bg-zinc-400 py-2 pl-4 gap-1 rounded text-sm  hover:bg-zinc-600 hover:text-white cursor-pointer       max-md:text-[13px] max-md:pl-3 max-md:pr-1 max-md:w-[48%]">
+            <button className="w-full flex items-center  bg-zinc-200 py-2 pl-4 gap-1 rounded text-sm  hover:bg-zinc-400 hover:text-white cursor-pointer       max-md:text-[13px] max-md:pl-3 max-md:pr-1 max-md:w-[48%]">
               <div className="text-base">
                 <svg
                   stroke="currentColor"
@@ -696,7 +698,7 @@ const DetailsModal: React.FC<ModalProps> = ({
               Make Template
             </button>
             <div className="w-full h-px bg-zinc-600     max-md:w-[92%]"></div>
-            <button className="w-full flex items-center  bg-zinc-400 py-2 pl-4 gap-1 rounded text-sm  hover:bg-zinc-600 hover:text-white cursor-pointer       max-md:text-[13px] max-md:pl-3 max-md:pr-1 max-md:w-[48%]">
+            <button className="w-full flex items-center  bg-zinc-200 py-2 pl-4 gap-1 rounded text-sm  hover:bg-zinc-400 hover:text-white cursor-pointer       max-md:text-[13px] max-md:pl-3 max-md:pr-1 max-md:w-[48%]">
               <div className="text-base">
                 <svg
                   stroke="currentColor"
@@ -716,7 +718,7 @@ const DetailsModal: React.FC<ModalProps> = ({
               </div>
               Archive
             </button>
-            <button className="w-full flex items-center  bg-zinc-400 py-2 pl-4 gap-1 rounded text-sm  hover:bg-zinc-600 hover:text-white cursor-pointer       max-md:text-[13px] max-md:pl-3 max-md:pr-1 max-md:w-[48%]">
+            <button className="w-full flex items-center  bg-zinc-200 py-2 pl-4 gap-1 rounded text-sm  hover:bg-zinc-400 hover:text-white cursor-pointer       max-md:text-[13px] max-md:pl-3 max-md:pr-1 max-md:w-[48%]">
               <div className="text-base">
                 <svg
                   stroke="currentColor"
