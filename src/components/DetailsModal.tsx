@@ -96,7 +96,7 @@ const DetailsModal: React.FC<ModalProps> = ({
 
   if (!isOpen) return null;
   return (
-    <div className="fixed inset-0 w-full overflow-y-scroll h-full z-50 top-0 flex justify-center backdrop-blur-md">
+    <div className="fixed inset-0 w-full overflow-y-scroll h-full z-50 top-0 flex justify-center backdrop-blur-lg">
         <div className="text-[#b6c2cf] absolute top-0 left-0 right-0 mx-auto p-6 rounded-2xl w-[768px] md:min-h-[890px] md:max-h-full bg-white border-t-4 border-b-4 shadow-2xl border-zinc-400 opacity-100 my-12 flex max-md:flex-col max-md:w-[80%] max-md:h-fit z-[9999]">
         <svg
           stroke="currentColor"
@@ -237,7 +237,7 @@ const DetailsModal: React.FC<ModalProps> = ({
                 </div>
                 <div className="flex items-center">
                   <p
-                    className="text-[11px] flex items-center cursor-pointer hover:underline"
+                    className="text-[11px] flex items-center cursor-pointer hover:underline  text-indigo-500"
                     onClick={() => {
                       setTaskDescription(description);
                       setEditMode(true);
@@ -250,7 +250,7 @@ const DetailsModal: React.FC<ModalProps> = ({
                       viewBox="0 0 24 24"
                       stroke-linecap="round"
                       stroke-linejoin="round"
-                      className="text-xl"
+                      className="text-xl text-indigo-500"
                       height="1em"
                       width="1em"
                       xmlns="http://www.w3.org/2000/svg"
@@ -267,7 +267,7 @@ const DetailsModal: React.FC<ModalProps> = ({
                       viewBox="0 0 24 24"
                       stroke-linecap="round"
                       stroke-linejoin="round"
-                      className="text-xl"
+                      className="text-xl text-red-500"
                       height="1em"
                       width="1em"
                       xmlns="http://www.w3.org/2000/svg"
@@ -275,6 +275,7 @@ const DetailsModal: React.FC<ModalProps> = ({
                       <circle cx="12.1" cy="12.1" r="1"></circle>
                     </svg>
                     <button
+                    className="text-red-500"
                       onClick={() => {
                         handleDeleteDescription();
                         setEditMode(true);
@@ -384,7 +385,7 @@ const DetailsModal: React.FC<ModalProps> = ({
                             viewBox="0 0 24 24"
                             strokeLinecap="round"
                             strokeLinejoin="round"
-                            className="text-xl"
+                            className="text-xl text-red-500"
                             height="1em"
                             width="1em"
                             xmlns="http://www.w3.org/2000/svg"
@@ -395,6 +396,7 @@ const DetailsModal: React.FC<ModalProps> = ({
                             onClick={() => {
                               handleDeleteComment(id);
                             }}
+                            className="text-red-500"
                           >
                             delete
                           </button>
