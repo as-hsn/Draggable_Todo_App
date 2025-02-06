@@ -90,7 +90,7 @@ const ResponsiveHeader: FC<ResponsiveHeaderProps> = ({
                 className="cursor-pointer truncate max-w-[9rem] text-black border-2 border-black px-4 py-2 rounded-lg"
               >
                 <option value="" disabled>
-                  Select List
+                  Select Todo
                 </option>
                 {columns.map((col) => (
                   <option key={col.id} value={col.id}>
